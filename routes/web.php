@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'InicioController@index')->name('inicio.index');
 
 
 Route::get('recetas', 'RecetaController@index')->name('recetas.index');
@@ -35,7 +33,7 @@ Route::get('perfiles/{perfil}/edit', 'PerfilController@edit')->name('perfiles.ed
 Route::put('perfiles/{perfil}', 'PerfilController@update')->name('perfiles.update');
 // almacena los likes de las recetas.
 
-Route::post('recetas/${receta}', 'LikesController@store')->name('likes.store');
+Route::post('recetas/{receta}', 'LikesController@update')->name('likes.update');
 Auth::routes();
 
 

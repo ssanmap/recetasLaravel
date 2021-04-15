@@ -7,10 +7,10 @@
     <h1 class="text-center mb-4">{{$receta->titulo}}</h1>
 
     <div class="imagen-receta">
-        <img src="/storage/{{ $receta->imagen}}"  class="w-100"alt="">
+        <img src="/storage/{{ $receta->imagen}}"  class="w-50 mx-auto d-block"alt="">
     </div>
 
-    <div class="receta-meta mt-2">
+    <div class="receta-meta mt-2 text-center">
         <p>
             <span class="font-weight-bold text-primary"> Escrito en:</span>
             {{$receta->categoria->nombre}}
@@ -41,7 +41,14 @@
             <h2 class="my-3 text-primary">Preparacion</h2>
             {!! $receta->preparacion !!}
         </div>
-        <like-button></like-button>
+
+        <div class="justify-content-center">
+            <like-button receta-id="{{ $receta->id}}"
+                like="{{$like}}"
+                likes="{{ $likes }}"
+                ></like-button>
+        </div>
+
 
     </div>
 </article>

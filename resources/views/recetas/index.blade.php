@@ -57,7 +57,27 @@
             {{ $recetas->links()}}
         </div>
 
+            <h2 class="text-center my-5">Recetas que te gustan</h2>
+            <div class="col-md-10 mx-auto bg-white p-3">
 
+                @if(count($usuario->meGusta) > 0 )
+
+
+                <ul class="list-group">
+                    @foreach ($usuario->meGusta as $receta )
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <p>{{ $receta->titulo}}</p>
+                        <a href="{{ action('RecetaController@show', ['receta' => $receta->id]) }}" class="btn btn-success mb-2 d-block">Ver</a>
+                    </li>
+                    @endforeach
+
+                </ul>
+
+                @else
+                <p class="text-center">Sin Recetas guardadas</p>
+
+                @endif
+            </div>
     </div>
 
     @endsection

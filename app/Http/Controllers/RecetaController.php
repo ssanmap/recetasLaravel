@@ -28,6 +28,7 @@ class RecetaController extends Controller
         $recetas = auth()->user()->recetas;
         $usuario = auth()->user();
         $user = auth()->user()->id;
+        $meGusta = auth()->user()->meGusta;
 
         // paginacion
         //
@@ -113,8 +114,14 @@ class RecetaController extends Controller
      */
     public function show(Receta $receta)
     {
-        //
-        return view('recetas.show', compact('receta'));
+        //obtener si el usuario actual le gusta la receta y esta autenticado
+
+        $like = ( auth()->user()  ) ? auth()->user()->meGusta->contains($receta->id) : false;
+
+        // pasar la cantidad de likes a la vista.
+
+        $likes = $receta->likes->count();
+        return view('recetas.show', compact('receta', 'like', 'likes'));
     }
 
     /**
