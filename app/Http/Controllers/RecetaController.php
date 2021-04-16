@@ -203,4 +203,13 @@ class RecetaController extends Controller
 
         return redirect()->action('RecetaController@index');
     }
+
+
+    public function search(Request $request){
+
+        $busqueda = $request['buscar'];
+
+        return $busqueda;
+
+    }
 }
