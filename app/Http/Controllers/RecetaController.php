@@ -14,7 +14,7 @@ class RecetaController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'show']);
+        $this->middleware('auth', ['except' => ['show', 'search']]);
     }
     /**
      * Display a listing of the resource.
@@ -209,7 +209,11 @@ class RecetaController extends Controller
 
         $busqueda = $request['buscar'];
 
-        return $busqueda;
+        $recetas = Receta::where('titulo', 'like', '%' . $busqueda . '%')->paginate(2);
+
+        $recetas->appends(['buscar' => $busqueda]);
+
+        return view('busquedas.show', compact('recetas', 'busqueda'));
 
     }
 }
